@@ -32,14 +32,7 @@ class _default extends MX_Controller {
 		$this->page['data'] = modules::run('__globalmodule/__globalmodule/get_tablename');
 		$this->page['assets_url'] = $this->assets;
 
-		$this->script_tags = array(
-			array(
-				'script_name' => 'FontAwesome 5',
-				'src' => $this->assets . 'fontawesome/svg-with-js/js/fontawesome-all.min.js',
-				'type' => '',
-				'attrs' => array('defer')
-			)
-		);
+		$this->link_tags = array(		);
 		$this->link_tags = array(
 			array(
 				'link_name' => 'W3.CSS',
@@ -51,7 +44,13 @@ class _default extends MX_Controller {
 				'rel' => '',
 				'type' => '',
 				'href' => $this->assets . 'css/style.css'
+			), array(
+				'link_name' => 'FontAwesome 5',
+				'href' => $this->assets . 'fontawesome/web/css/fontawesome-all.min.css',
+				'type' => '',
+				'rel' => ''
 			)
+
 		);
 		$this->functions->render_page(true, $this->page['page_title'], $this->script_tags, $this->link_tags, $this->meta_tags, $view, true, $this->page);
 	}

@@ -2,6 +2,27 @@ body {
 	margin: 0 auto;
 }
 
+#modal {
+	z-index: 2;
+	position: absolute;
+	display: none;
+	top: 100px;
+	bottom: 100px;
+	left: 100px;
+	right: 100px;
+}
+
+#overlay {
+	background-color: #000;
+	opacity: 0.50;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	display: none;
+}
+
 /*h1, h2, h3, h4, h5, h6 {
 	font-family: 'Century Gothic' !important;
 }*/
@@ -39,7 +60,7 @@ body {
 	padding: 0 10px 10px 10px;
 }
 
-form.enroll-form input, form.login-form input {
+form.enroll-form input, form.login-form input, form.enroll-form select {
 	background: transparent;
 	padding: 5px;
 	border-width: 2px; 
@@ -52,4 +73,5 @@ form.enroll-form input, form.login-form input {
 
 .margin-lr-20 {
 	margin: 0 20px;
+	display: inline-block;
 }

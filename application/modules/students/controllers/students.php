@@ -35,7 +35,7 @@ class Students extends MX_Controller {
 				'attrs' => array()
 			), array(
 				'script_name' => 'jQuery UI',
-				'src' => $this->assets . 'jq-default-ui/jquery-ui.min.js',
+				'src' => $this->assets . 'jquery-ui-custom/jquery-ui.min.js',
 				'type' => '',
 				'attrs' => array()
 			)

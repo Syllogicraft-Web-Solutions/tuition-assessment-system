@@ -32,10 +32,11 @@ class Functions {
 		echo "nyeam";
 	}
 
+	// Please use $page variable inside the page you are going to render, if you have a data to pass in it
 	function render_page($start = true, $page_title = "", $js = array(), $link = array(), $meta = array(), $view_file = "", $end = true, $data = []) {
 		$CI =& get_instance();
 		$page['page_title'] = $page_title;
-		$page['page_vars'] = $data;
+		$page['page'] = $data;
 		// exit(var_dump($link))
 		if ($start)
 			$CI->load->view('head/html-start.php', $page); //start head tag

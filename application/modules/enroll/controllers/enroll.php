@@ -22,6 +22,8 @@ class Enroll extends MX_Controller {
 		* Add and set variable for the page here
 		*/
 		$this->page['page_title'] = "Enroll";
+		$this->page['module_name'] = "enroll/";
+
 		$this->script_tags = array(
 			array(
 				'script_name' => 'jQuery',
@@ -35,7 +37,7 @@ class Enroll extends MX_Controller {
 				'attrs' => array()
 			), array(
 				'script_name' => 'jQuery UI',
-				'src' => $this->assets . 'jq-default-ui/jquery-ui.min.js',
+				'src' => $this->assets . 'jquery-ui-custom/jquery-ui.min.js',
 				'type' => '',
 				'attrs' => array()
 			)
@@ -85,6 +87,10 @@ class Enroll extends MX_Controller {
 		$this->functions->render_page(true, $this->page['page_title'], $this->script_tags, $this->link_tags, $this->meta_tags, $view, true, $this->page);
 	}
 
+	function register() {
+		echo '<pre>';
+		echo json_encode($_POST);
+	}
 
 	/*
 	* Call this function to load all the JS and CSS frameworks and libraries
