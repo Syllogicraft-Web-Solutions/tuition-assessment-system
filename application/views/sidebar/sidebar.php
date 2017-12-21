@@ -1,5 +1,5 @@
 <?php
-	// var_dump($links);
+	// var_dump($links); exit();
 ?>
 
 <div id="sidebar" class="w3-sidebar w3-bar-block w3-black <?= isset($options['text_align']) != '' ? 'w3-' . $options['text_align'] : '' ?>" style="width: <?= $options['width'] ?>">
@@ -9,8 +9,9 @@
 				$url = $value['url'] != '' ? $value['url'] : '';
 				$icon = $value['icon'] != '' ? $value['icon'] : '';
 				$text = $value['text'] != '' ? $value['text'] : '';
+				$module_name = $value['module_name'] != '' ? $value['module_name'] : '';
 			?>
-				<a href="<?= "{$url}" ?>" class="w3-bar-item w3-button"><i class="fa <?= $icon ?> "></i>&nbsp;<?= "{$text}" ?></a>
+				<a href="<?= "{$url}" ?>" class="<?= $current_module_name == $module_name ? 'w3-theme-light' : '' ?> w3-bar-item w3-button"><i class="fa <?= $icon ?> "></i>&nbsp;<?= "{$text}" ?></a>
 			<?php
 			}
 		} else {

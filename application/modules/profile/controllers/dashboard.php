@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Assessments extends MX_Controller {
+class Dashboard extends MX_Controller {
 
 	var $page;
 	var $assets;
@@ -21,7 +21,9 @@ class Assessments extends MX_Controller {
 		/*
 		* Add and set variable for the page here
 		*/
-		$this->page['page_title'] = "Login";
+		$this->page['page_title'] = "Dashboard";
+		$this->page['module_name'] = "dashboard/";
+
 		$this->script_tags = array(
 			array(
 				'script_name' => 'jQuery',
@@ -35,7 +37,7 @@ class Assessments extends MX_Controller {
 				'attrs' => array()
 			), array(
 				'script_name' => 'jQuery UI',
-				'src' => $this->assets . 'jq-default-ui/jquery-ui.min.js',
+				'src' => $this->assets . 'jquery-ui-custom/jquery-ui.min.js',
 				'type' => '',
 				'attrs' => array()
 			)
@@ -80,12 +82,21 @@ class Assessments extends MX_Controller {
 
 
 	function index() {
-		$view = 'login/index';
+		$view = 'enroll/index';
 		$this->page['assets_url'] = $this->assets;
 
+		// $this->functions->add_menu('dashboard', base_url() . 'dashboard', 'fa-home', 'Dashboard');
+		// $this->functions->add_menu('nyeam', base_url() . 'dashboard', 'fa-home', 'Dashboard');
+
+		$this->functions->add_sidebar($this->page['module_name'], true, array('width' => '150px', 'text_align' => 'left'));
 		$this->functions->render_page(true, $this->page['page_title'], $this->script_tags, $this->link_tags, $this->meta_tags, $view, true, $this->page);
+		// var_dump($GLOBALS);
 	}
 
+	function register() {
+		echo '<pre>';
+		echo json_encode($_POST);
+	}
 
 	/*
 	* Call this function to load all the JS and CSS frameworks and libraries

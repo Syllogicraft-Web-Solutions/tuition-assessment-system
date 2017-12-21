@@ -11,6 +11,8 @@ class _default extends MX_Controller {
 
 	function __construct() {
 		parent::__construct();
+
+
 		/*$this->load->helper('text');
 		$this->load->helper('string');
 		$this->load->library('shortcode');*/

@@ -13,6 +13,14 @@ class Login extends MX_Controller {
 
 	function __construct() {
 		parent::__construct();
+		// exit();
+
+		if ($this->session->userdata('user_cookie') && isset($_GET['ref'])) {
+			header('Location: ' .  urldecode($_GET['ref']));//$this->session->userdata('redirect_here')));
+            // $this->session->set_userdata('redirect_here', '');
+        } else if ($this->session->userdata('user_cookie'))
+			header('Location: ' . base_url('dashboard'));
+
 		/*$this->load->helper('text');
 		$this->load->helper('string');
 		$this->load->library('shortcode');*/
@@ -90,7 +98,7 @@ class Login extends MX_Controller {
 	}
 
 
-	function index() {
+	function index() {			
 
 		if (isset($_POST['login']) != '') {
 			$result = $this->do_login($_POST);
@@ -118,7 +126,7 @@ class Login extends MX_Controller {
 						'logged_in' => true,
 						'id' => $val->id
 					));
-					redirect(base_url() . 'dashboard/', 'location');
+					// redirect(base_url() . 'dashboard/', 'location');
 				}
 				return true;
 			} else {

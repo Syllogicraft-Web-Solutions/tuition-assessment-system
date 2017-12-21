@@ -13,6 +13,7 @@ body {
 }
 
 #overlay {
+	z-index: 2;
 	background-color: #000;
 	opacity: 0.50;
 	position: absolute;

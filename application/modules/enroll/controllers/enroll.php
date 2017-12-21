@@ -11,6 +11,8 @@ class Enroll extends MX_Controller {
 
 	function __construct() {
 		parent::__construct();
+
+
 		/*$this->load->helper('text');
 		$this->load->helper('string');
 		$this->load->library('shortcode');*/
@@ -82,8 +84,15 @@ class Enroll extends MX_Controller {
 
 
 	function index() {
+
 		$view = 'enroll/index';
 		$this->page['assets_url'] = $this->assets;
+
+
+		// $this->functions->add_menu('enroll', base_url() . 'enroll', 'fa-pencil', 'Enroll');
+
+
+		$this->functions->add_sidebar($this->page['module_name'], true, array('width' => '150px', 'text_align' => 'left'));
 		$this->functions->render_page(true, $this->page['page_title'], $this->script_tags, $this->link_tags, $this->meta_tags, $view, true, $this->page);
 	}
 

@@ -11,9 +11,6 @@ class Dashboard extends MX_Controller {
 
 	function __construct() {
 		parent::__construct();
-		/*$this->load->helper('text');
-		$this->load->helper('string');
-		$this->load->library('shortcode');*/
 		$this->assets = base_url() . 'public/assets/';
 		$this->load->module('globalcontroller');
 		// $this->shortcode->add('bartag', array($this, 'bartag_func'));
@@ -85,16 +82,12 @@ class Dashboard extends MX_Controller {
 		$view = 'enroll/index';
 		$this->page['assets_url'] = $this->assets;
 
-		$links = array(
-			array(
-				'url' => base_url() . 'dashboard',
-				'icon' => 'fa-home',
-				'text' => 'Dashboard'
-			)
-		);
+		// $this->functions->add_menu('dashboard', base_url() . 'dashboard', 'fa-home', 'Dashboard');
+		// $this->functions->add_menu('nyeam', base_url() . 'dashboard', 'fa-home', 'Dashboard');
 
-		$this->functions->add_sidebar(true, $links, array('width' => '150px', 'text_align' => 'left'));
+		$this->functions->add_sidebar($this->page['module_name'], true, array('width' => '150px', 'text_align' => 'left'));
 		$this->functions->render_page(true, $this->page['page_title'], $this->script_tags, $this->link_tags, $this->meta_tags, $view, true, $this->page);
+		// var_dump($GLOBALS);
 	}
 
 	function register() {

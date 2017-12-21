@@ -62,7 +62,7 @@ class Functions {
 		$CI->load->view('head/html-end-head.php'); //end head tag
 
 		if ($this->sidebar['show']) {
-			$this->render_sidebar($this->sidebar['links'], $this->sidebar['options']);
+			$this->render_sidebar($CI->globals->get_globals('menu_links'), $this->sidebar['options'], $this->sidebar['current_module_name']);
 			// $sidebar['margin_left'] = '10%';
 		}
 
@@ -93,18 +93,32 @@ class Functions {
 			$this->load->view($view_file); // the content
 	}
 	
-	function render_sidebar($links = null, $options) {
+	function render_sidebar($links = null, $options, $current_module_name) {
 		$CI =& get_instance();
 		$data['links'] = $links;
 		$data['options'] = $options;
+		$data['current_module_name'] = $current_module_name;
 		$CI->load->view('sidebar/sidebar', $data);
 	 }
 
-	function add_sidebar($bool = false, $links = array(), $options = array('width' => '10%')) {
+	function add_sidebar($current_module_name = "", $bool = false, $options = array('width' => '10%')) {
 		if ($bool == true)
-			$this->sidebar = array('show' => true, 'links' => $links, 'options' => $options);
+			$this->sidebar = array('current_module_name' => str_replace('/', '', $current_module_name), 'show' => true, 'options' => $options);
 		else
-			$this->sidebar = array('show' => false, 'links' => $links, 'options' => $options);
+			$this->sidebar = array('current_module_name' => str_replace('/', '', $current_module_name), 'show' => false, 'options' => $options);
+	}
+
+	function add_menu($name, $url, $icon, $text, $module_name = '') {
+		$CI =& get_instance();
+
+		$menu_links = array(
+			'url' => $url,
+			'icon' => $icon,
+			'text' => $text,
+			'module_name' => $module_name
+		);
+		$CI->load->library('globals');
+		$CI->globals->set_globals($name, $menu_links, 'menu_links', $module_name = '');
 	}
 
 	function add_script($script_name, $src = '', $type = "", $attrs = array()) {

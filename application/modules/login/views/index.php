@@ -1,5 +1,10 @@
 <?php
 	defined('BASEPATH') OR exit('No direct script access allowed');
+
+	if (isset($_GET['ref']))
+		$url = base_url() . $page['module_name'] . '?ref=' . urlencode($_GET['ref']);
+	else 
+		$url = base_url() . $page['module_name'];
 	
 	if (isset($page['login_status'])) {
 		if ($page['login_status']['code'] == 'invalid_acc') {
@@ -18,7 +23,7 @@
 	
 	<div class="hero-shot full-height full-width w3-display-container" style="">
 
-		<form class="login-form w3-theme-l3 w3-display-middle w3-display-container" method="post" action="<?= base_url() . $page['module_name'] ?>">
+		<form class="login-form w3-theme-l3 w3-display-middle w3-display-container" method="post" action="<?= $url ?>">
 			<div class="w3-container w3-theme">
 				<h3><i class="fa fa-power-off fa-5" aria-hidden="true">&nbsp;</i>Login</h3>
 			</div>
