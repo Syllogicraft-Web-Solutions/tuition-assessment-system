@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Enroll extends MX_Controller {
+class enroll extends MX_Controller {
 
 	var $page;
 	var $assets;
