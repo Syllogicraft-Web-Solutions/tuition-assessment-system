@@ -1,37 +1,28 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Login extends MX_Controller {
+class Dashboard extends MX_Controller {
 
 	var $page;
 	var $assets;
 	var $script_tags;
 	var $link_tags;
 	var $meta_tags;
-	var $global;
-	var $view;
 
 	function __construct() {
 		parent::__construct();
 		/*$this->load->helper('text');
 		$this->load->helper('string');
 		$this->load->library('shortcode');*/
-		$this->global = '__globalmodule';
-
 		$this->assets = base_url() . 'public/assets/';
-		$this->load->module($this->global);
-		// $this->load->model('__globalmodel');
+		$this->load->module('globalcontroller');
 		// $this->shortcode->add('bartag', array($this, 'bartag_func'));
 
 		/*
 		* Add and set variable for the page here
 		*/
-		$this->page['page_title'] = "Login";
-		$this->page['module_name'] = "login/";
-		$this->page['assets_url'] = $this->assets;
-
-
-		$this->view = 'login/index';
+		$this->page['page_title'] = "Dashboard";
+		$this->page['module_name'] = "dashboard/";
 
 		$this->script_tags = array(
 			array(
@@ -91,45 +82,24 @@ class Login extends MX_Controller {
 
 
 	function index() {
+		$view = 'enroll/index';
+		$this->page['assets_url'] = $this->assets;
 
-		if (isset($_POST['login']) != '') {
-			$result = $this->do_login($_POST);
-			$this->page['login_status'] = $result;
-		}
+		$links = array(
+			array(
+				'url' => base_url() . 'dashboard',
+				'icon' => 'fa-home',
+				'text' => 'Dashboard'
+			)
+		);
 
-		$this->functions->render_page(true, $this->page['page_title'], $this->script_tags, $this->link_tags, $this->meta_tags, $this->view, true, $this->page);
+		$this->functions->add_sidebar(true, $links, array('width' => '150px', 'text_align' => 'left'));
+		$this->functions->render_page(true, $this->page['page_title'], $this->script_tags, $this->link_tags, $this->meta_tags, $view, true, $this->page);
 	}
 
-	function do_login($data) {
-		$global = $this->global;
-
-		if ($data['login'] != "") {
-			$this->$global->set_tablename('users');
-			$tablename = $this->$global->get_tablename();
-			$query = "SELECT * FROM $tablename WHERE user_login = \"{$data['username']}\" AND user_password = \"{$data['password']}\" LIMIT 1";
-
-			$row = $this->$global->_custom_query($query);
-			if ($row->result()) {
-				foreach ($row->result() as $key => $val) {
-					if ($val->user_status == 0) {
-						return;
-					}
-					$this->session->set_userdata('user_cookie', array(
-						'logged_in' => true,
-						'id' => $val->id
-					));
-					redirect(base_url() . 'dashboard/', 'location');
-				}
-				return true;
-			} else {
-				$login_status = array(
-					'code' => 'invalid_acc',
-					'message' => 'Credential not found.'
-				);
-				return $login_status;
-				//$this->functions->render_page(true, $this->page['page_title'], $this->script_tags, $this->link_tags, $this->meta_tags, $this->view, true, $this->page);
-			}
-		}
+	function register() {
+		echo '<pre>';
+		echo json_encode($_POST);
 	}
 
 	/*

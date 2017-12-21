@@ -5,6 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Functions {
 
 	var $page;
+	var $sidebar;
 
 	/**
 	 * @param $start - true if you want to render the start of the HTML document
@@ -37,6 +38,7 @@ class Functions {
 		$CI =& get_instance();
 		$page['page_title'] = $page_title;
 		$page['page'] = $data;
+		$page['with_sidebar'] = false;
 		// exit(var_dump($link))
 		if ($start)
 			$CI->load->view('head/html-start.php', $page); //start head tag
@@ -59,11 +61,21 @@ class Functions {
 
 		$CI->load->view('head/html-end-head.php'); //end head tag
 
+		if ($this->sidebar['show']) {
+			$this->render_sidebar($this->sidebar['links'], $this->sidebar['options']);
+			// $sidebar['margin_left'] = '10%';
+		}
+
+		$CI->load->view('the-content/start-content', $this->sidebar); // start the content div
+
 		if ($view_file != "")
 			$CI->load->view($view_file); // the content
 
+		$CI->load->view('the-content/start-content'); // end the content div
+
 		if ($end)
 			$CI->load->view('foot/html-end.php'); // end of html
+
 	}
 
 	function render_blank($js = array(), $link = array(), $view_file = "") {
@@ -79,6 +91,20 @@ class Functions {
 		}
 		if ($view_file != "")
 			$this->load->view($view_file); // the content
+	}
+	
+	function render_sidebar($links = null, $options) {
+		$CI =& get_instance();
+		$data['links'] = $links;
+		$data['options'] = $options;
+		$CI->load->view('sidebar/sidebar', $data);
+	 }
+
+	function add_sidebar($bool = false, $links = array(), $options = array('width' => '10%')) {
+		if ($bool == true)
+			$this->sidebar = array('show' => true, 'links' => $links, 'options' => $options);
+		else
+			$this->sidebar = array('show' => false, 'links' => $links, 'options' => $options);
 	}
 
 	function add_script($script_name, $src = '', $type = "", $attrs = array()) {
