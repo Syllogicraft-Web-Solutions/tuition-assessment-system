@@ -108,11 +108,12 @@ class Functions {
 			$this->sidebar = array('current_module_name' => str_replace('/', '', $current_module_name), 'show' => false, 'options' => $options);
 	}
 
-	function add_menu($name, $url, $icon, $text, $module_name = '') {
+	function add_menu($name, $show_name, $url, $icon, $text, $module_name = '') {
 		$CI =& get_instance();
 
 		$menu_links = array(
 			'url' => $url,
+			'show_name' => $show_name,
 			'icon' => $icon,
 			'text' => $text,
 			'module_name' => $module_name

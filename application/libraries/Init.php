@@ -21,8 +21,8 @@ class Init extends Functions {
 
 
 		// add more links here
-		$this->add_menu('dashboard', base_url() . 'dashboard', 'fa-home', 'Dashboard', 'dashboard');
-		$this->add_menu('enroll', base_url() . 'enroll', 'fa-plus', 'Enroll', 'enroll');
+		$this->add_menu('dashboard', false, base_url() . 'dashboard', 'fa-home', 'Dashboard', 'dashboard');
+		$this->add_menu('enroll', false, base_url() . 'enroll', 'fa-plus', 'Enroll', 'enroll');
 	}
 
 

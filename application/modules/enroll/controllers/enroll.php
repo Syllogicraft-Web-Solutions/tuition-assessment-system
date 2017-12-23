@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class enroll extends MX_Controller {
+class Enroll extends MX_Controller {
 
 	var $page;
 	var $assets;
@@ -24,7 +24,7 @@ class enroll extends MX_Controller {
 		* Add and set variable for the page here
 		*/
 		$this->page['page_title'] = "Enroll";
-		$this->page['module_name'] = "enroll/";
+		$this->page['module_name'] = "Enroll/";
 
 		$this->script_tags = array(
 			array(

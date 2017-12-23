@@ -7,11 +7,12 @@
 		if (sizeof($links) > 0) {
 			foreach ($links as $key => $value) {
 				$url = $value['url'] != '' ? $value['url'] : '';
+				$show = $value['show_name'] != '' ? $value['show_name'] : '';
 				$icon = $value['icon'] != '' ? $value['icon'] : '';
 				$text = $value['text'] != '' ? $value['text'] : '';
 				$module_name = $value['module_name'] != '' ? $value['module_name'] : '';
 			?>
-				<a href="<?= "{$url}" ?>" class="<?= $current_module_name == $module_name ? 'w3-theme-light' : '' ?> w3-bar-item w3-button"><i class="fa <?= $icon ?> "></i>&nbsp;<?= "{$text}" ?></a>
+				<a href="<?= "{$url}" ?>" class="<?= $current_module_name == $module_name ? 'w3-theme-light' : '' ?> w3-bar-item w3-button"><i class="fa <?= $icon ?> "></i><?= $show ? '&nbsp;' . $text : '' ?></a>
 			<?php
 			}
 		} else {

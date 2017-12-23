@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class login extends MX_Controller {
+class Login extends MX_Controller {
 
 	var $page;
 	var $assets;
@@ -15,10 +15,10 @@ class login extends MX_Controller {
 		parent::__construct();
 		// exit();
 
-		if ($this->session->userdata('user_cookie') && isset($_GET['ref'])) {
+		if ($this->session->has_userdata('user_cookie') && isset($_GET['ref'])) {
 			header('Location: ' .  urldecode($_GET['ref']));//$this->session->userdata('redirect_here')));
             // $this->session->set_userdata('redirect_here', '');
-        } else if ($this->session->userdata('user_cookie'))
+        } else if ($this->session->has_userdata('user_cookie'))
 			header('Location: ' . base_url('dashboard'));
 
 		/*$this->load->helper('text');
@@ -35,7 +35,7 @@ class login extends MX_Controller {
 		* Add and set variable for the page here
 		*/
 		$this->page['page_title'] = "Login";
-		$this->page['module_name'] = "login/";
+		$this->page['module_name'] = "Login/";
 		$this->page['assets_url'] = $this->assets;
 
 
@@ -138,6 +138,12 @@ class login extends MX_Controller {
 				//$this->functions->render_page(true, $this->page['page_title'], $this->script_tags, $this->link_tags, $this->meta_tags, $this->view, true, $this->page);
 			}
 		}
+	}
+
+	function do_logout() {
+
+		$this->session->unset_userdata('user_cookie');
+
 	}
 
 	/*
