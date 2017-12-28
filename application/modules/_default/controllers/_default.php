@@ -17,22 +17,28 @@ class _default extends MX_Controller {
 		$this->load->helper('string');
 		$this->load->library('shortcode');*/
 		$this->assets = base_url() . 'public/assets/';
+		$this->img = base_url() . 'public/img/';
+		$this->img = base_url() . 'public/img/';
 		$this->load->module('globalcontroller');
 		// $this->shortcode->add('bartag', array($this, 'bartag_func'));
 
 		/*
 		* Add and set variable for the page here
 		*/
-		$this->page['page_title'] = "_Default";
+		$this->page['page_title'] = "Coming Soon";
+		$this->page['module_name'] = "_default/";
+		$this->page['assets_url'] = base_url($this->assets);
+		$this->page['img_url'] = base_url($this->img);
 	}
 
 
 	function index() {
-		$view = '_default/index';
+		$view = $this->page['module_name'] . 'sample';
 		// $this->load_default();
 		modules::run('__globalmodule/__globalmodule/set_tablename', 'nyeam_table');
 		$this->page['data'] = modules::run('__globalmodule/__globalmodule/get_tablename');
 		$this->page['assets_url'] = $this->assets;
+		$this->page['img_url'] = $this->img;
 
 		$this->link_tags = array(		);
 		$this->link_tags = array(
@@ -42,10 +48,10 @@ class _default extends MX_Controller {
 				'type' => '',
 				'href' => $this->assets . 'w3-css/4-w3.css'
 			), array(
-				'link_name' => 'Default Stylings',
-				'rel' => '',
+				'link_name' => 'Font Google',
+				'rel' => 'stylesheet',
 				'type' => '',
-				'href' => $this->assets . 'css/style.css'
+				'href' => 'https://fonts.googleapis.com/css?family=Raleway'
 			), array(
 				'link_name' => 'FontAwesome 5',
 				'href' => $this->assets . 'fontawesome/web/css/fontawesome-all.min.css',
@@ -54,7 +60,14 @@ class _default extends MX_Controller {
 			)
 
 		);
-		$this->functions->render_page(true, $this->page['page_title'], $this->script_tags, $this->link_tags, $this->meta_tags, $view, true, $this->page);
+		$this->meta_tags = array(
+			array(
+				'meta_name' => 'Viewport',
+				'name' => 'viewport',
+				'content' => 'width=device-width, initial-scale=1'
+			)
+		);
+		$this->functions->render_blank(array(), array(), $view, $this->page);
 	}
 
 

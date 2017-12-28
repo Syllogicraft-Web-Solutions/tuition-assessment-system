@@ -11,8 +11,12 @@
 				$icon = $value['icon'] != '' ? $value['icon'] : '';
 				$text = $value['text'] != '' ? $value['text'] : '';
 				$module_name = $value['module_name'] != '' ? $value['module_name'] : '';
+				if ($module_name != '')
+					$curr_mod = strpos($current_module_name, $module_name);
+				else
+					$curr_mod = false;
 			?>
-				<a href="<?= "{$url}" ?>" class="<?= $current_module_name == $module_name ? 'w3-theme-light' : '' ?> w3-bar-item w3-button"><i class="fa <?= $icon ?> "></i><?= $show ? '&nbsp;' . $text : '' ?></a>
+				<a href="<?= $url ?>" title="<?= $text ?>" class="<?= $curr_mod ? 'w3-theme-light' : '' ?> w3-bar-item w3-button"><i class="fa <?= $icon ?> "></i><?= $show ? '&nbsp;' . $text : '' ?></a>
 			<?php
 			}
 		} else {

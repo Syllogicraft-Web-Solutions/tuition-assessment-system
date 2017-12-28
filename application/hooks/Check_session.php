@@ -15,19 +15,17 @@ class Check_session {
     }
     public function validate() {
 
-        if (in_array($this->router->class, array("login")))//login is a sample login controller {
+        // exit($this->router->fetch_class())
+
+
+        // $this->session->unset_userdata('redirect_here');
+
+        if ($this->router->fetch_class() == '_login' || $this->router->fetch_class() == '_default' || $this->session->userdata('user_cookie'))//login is a sample login controller {
             return;
 
-        if (! $this->session->userdata('user_cookie')) 
-            header('Location: ' . base_url('login') . '?ref=' . $this->session->userdata('redirect_here')) ;//. urldecode($this->session->userdata('redirect_here')));
-        // else if ($this->session->userdata('user_cookie') && $this->session->userdata('redirect_here') != '') {
-        //     header('Location: ' .  urldecode($this->session->userdata('redirect_here')));
-        //     $this->session->set_userdata('redirect_here', '');
-        // } else{
-        //     header('Location: ' . base_url('dashboard'));
-        //     $this->session->set_userdata('redirect_here', '');
-        // }
-        // else if ($this->session->userdata('user_cookie')) )
-
+        if (! $this->session->userdata('user_cookie')) {
+            header('Location: ' . base_url('login') . '?ref=' . $this->session->userdata('redirect_here')) ;
+            // $this->session->set_userdata('redirect_here', urlencode((isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"));
+        }
     }
 }

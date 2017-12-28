@@ -3,7 +3,7 @@
 	if ($with_sidebar) {
 
 ?>
-	<div id="sidebar" style="margin-left: <?= $options['width'] ?>">
+	<div id="the-content-with-sidebar" style="margin-left: <?= $options['width'] ?>">
 
 <?php 
 

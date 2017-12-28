@@ -38,7 +38,7 @@ class Functions {
 		$CI =& get_instance();
 		$page['page_title'] = $page_title;
 		$page['page'] = $data;
-		$page['with_sidebar'] = false;
+		$this->sidebar['with_sidebar'] = false;
 		// exit(var_dump($link))
 		if ($start)
 			$CI->load->view('head/html-start.php', $page); //start head tag
@@ -61,9 +61,9 @@ class Functions {
 
 		$CI->load->view('head/html-end-head.php'); //end head tag
 
-		if ($this->sidebar['show']) {
+		if (isset($this->sidebar['show'])) {
+			$this->sidebar['with_sidebar'] = true;
 			$this->render_sidebar($CI->globals->get_globals('menu_links'), $this->sidebar['options'], $this->sidebar['current_module_name']);
-			// $sidebar['margin_left'] = '10%';
 		}
 
 		$CI->load->view('the-content/start-content', $this->sidebar); // start the content div
@@ -71,14 +71,17 @@ class Functions {
 		if ($view_file != "")
 			$CI->load->view($view_file); // the content
 
-		$CI->load->view('the-content/start-content'); // end the content div
+		$CI->load->view('the-content/end-content'); // end the content div
 
 		if ($end)
 			$CI->load->view('foot/html-end.php'); // end of html
 
 	}
 
-	function render_blank($js = array(), $link = array(), $view_file = "") {
+	function render_blank($js = array(), $link = array(), $view_file = "", $data = []) {
+		$CI =& get_instance();
+		$page['page'] = $data;
+
 		if (sizeof($js) > 0) { // add script tags
 			foreach ($js as $key => $val) {
 				$this->add_script($val['script_name'], $val['src'], $val['type'], $val['attrs']);
@@ -90,7 +93,7 @@ class Functions {
 			}
 		}
 		if ($view_file != "")
-			$this->load->view($view_file); // the content
+			$CI->load->view($view_file, $page); // the content
 	}
 	
 	function render_sidebar($links = null, $options, $current_module_name) {
